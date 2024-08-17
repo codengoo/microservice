@@ -1,9 +1,9 @@
 FROM node:22 AS build-env
 WORKDIR /app
-COPY server/src/* ./src/
-COPY server/package.json ./
-COPY server/tsconfig.json ./
-COPY server/webpack.config.js ./
+COPY src/* ./src/
+COPY package.json ./
+COPY tsconfig.json ./
+COPY webpack.config.js ./
 RUN npm install
 RUN npm run build
 

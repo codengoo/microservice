@@ -1,16 +1,15 @@
 import express, { Request, Response } from 'express';
-import { calculatePrimes } from './app';
+import { getUser } from './app';
 import morgan from "morgan"
 
 const app = express();
-const port = 3001;
+const port = 3030;
 
 app.use(express.json());
 app.use(morgan("tiny"));
 
 app.get('/', (req: Request, res: Response) => {
-    const limit = Number(req.query.limit || 1000000 ); // default 1.000.000
-    const data = calculatePrimes(limit);
+    const data = getUser();
     res.json({ data });
 });
 

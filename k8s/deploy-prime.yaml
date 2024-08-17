@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: prime-deployment
 spec:
-  replicas: 5
+  replicas: 2
   selector:
     matchLabels:
       app: prime-app
@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: prime-app-container
-          image: 19122002/prime-image:v2
+          image: 19122002/prime-image
           ports:
             - containerPort: 3000
               name: http-web-api
@@ -26,3 +26,17 @@ spec:
             limits:
               cpu: 200m
               memory: 200Mi
+
+---
+
+apiVersion: v1 
+kind: Service 
+metadata: 
+  name: prime-service 
+spec: 
+  type: ClusterIP 
+  selector: 
+    app: prime-app
+  ports: 
+    - targetPort: 3000
+      port: 3000

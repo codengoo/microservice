@@ -30,15 +30,15 @@ spec:
 ---
 
 apiVersion: v1
-kind: Services
+kind: Service
 metadata:
-  name: api-gateway-load-balancer-service
+  name: api-gateway-service
 spec:
+  type: LoadBalancer
   selector:
     app: api-gateway-app
   ports:
     - name: api-gateway-port
       protocol: TCP
-      port: 3000
-      targetPort: 3000
-  type: LoadBalancer
+      port: 8888
+      targetPort: 8888
