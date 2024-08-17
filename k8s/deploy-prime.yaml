@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prime-deployment
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: prime-app
+  template:
+    metadata:
+      name: prime-template
+      labels:
+        app: prime-app
+    spec:
+      containers:
+        - name: prime-app-container
+          image: 19122002/prime-image:v2
+          ports:
+            - containerPort: 3000
+              name: http-web-api
+          resources:
+            requests: 
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 200m
+              memory: 200Mi

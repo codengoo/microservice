@@ -1,26 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: prime-deployment
-  annotations:
-    kubernetes.io/change-cause: "init deployment"
+  name: api-gateway-deployment
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: prime-app
+      app: api-gateway-app
   template:
     metadata:
-      name: prime-app-template
+      name: api-gateway-template
       labels:
-        app: prime-app
-        app.kubernetes.io/name: prime-app
+        app: api-gateway-app
     spec:
       containers:
-        - name: prime-app
-          image: 19122002/prime-image:v1
+        - name: api-gateway-container
+          image: 19122002/api-gateway
           ports:
-            - containerPort: 3001
+            - containerPort: 8888
               name: http-web-api
           resources:
             requests: 
@@ -33,15 +30,15 @@ spec:
 ---
 
 apiVersion: v1
-kind: Service
+kind: Services
 metadata:
-  name: prime-service
+  name: api-gateway-load-balancer-service
 spec:
   selector:
-    app.kubernetes.io/name: prime-app
+    app: api-gateway-app
   ports:
-    - name: "prime-port"
+    - name: api-gateway-port
       protocol: TCP
-      port: 3001
-      targetPort: 3001
+      port: 3000
+      targetPort: 3000
   type: LoadBalancer

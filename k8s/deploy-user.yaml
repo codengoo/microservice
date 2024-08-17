@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-app
+  template:
+    metadata:
+      name: user-template
+      labels:
+        app: user-app
+    spec:
+      containers:
+        - name: user-app-container
+          image: 19122002/user-image
+          ports:
+            - containerPort: 3030
+              name: http-web-api
+          resources:
+            requests: 
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 200m
+              memory: 200Mi
