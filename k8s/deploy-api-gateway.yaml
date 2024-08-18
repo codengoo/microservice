@@ -17,7 +17,7 @@ spec:
         - name: api-gateway-container
           image: 19122002/api-gateway
           ports:
-            - containerPort: 8888
+            - containerPort: 80
               name: http-web-api
           resources:
             requests: 
@@ -40,5 +40,5 @@ spec:
   ports:
     - name: api-gateway-port
       protocol: TCP
-      port: 8888
-      targetPort: 8888
+      port: 80
+      targetPort: 80

@@ -9,8 +9,12 @@ app.use(express.json());
 app.use(morgan("tiny"));
 
 app.get('/', (req: Request, res: Response) => {
-    const data = getUser();
-    res.json({ data });
+    try {
+        const data = getUser();
+        res.json({ data });
+    } catch (error) {
+        res.status(500);
+    }
 });
 
 app.listen(port, () => {
